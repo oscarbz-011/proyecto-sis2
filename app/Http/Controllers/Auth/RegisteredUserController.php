@@ -30,8 +30,9 @@ class RegisteredUserController extends Controller
         $user->assignRole('cliente');
         if(! auth::user()){
             Auth::login($user);
+            return view ('welcome');
         }
 
-        return view('welcome');
+        return view('admin.index');
     }
 }
