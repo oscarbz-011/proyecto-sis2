@@ -18,7 +18,7 @@
                                 class="form-control"
                                 name="code"
                                 id="code"
-                                value="{{$consult->code}}">
+                                value="{{$consult->code}}" disabled="true">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="dates_id">Fecha</label>
