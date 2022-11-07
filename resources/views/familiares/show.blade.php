@@ -27,11 +27,9 @@
 
         {{--<input type="text" class="form-control" value="{{$patient->name}}" disabled="true">--}}
         @foreach ($patient as $p)
-        
+
         @if($p->relatives_id == $relative->id_relative)
-        {
             <input type="text" class="form-control" value="{{$p->name}}" disabled="true">
-        }
         @else
 
         @endif
