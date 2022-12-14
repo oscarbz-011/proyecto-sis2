@@ -18,6 +18,7 @@ class CreateDatesTable extends Migration
             $table->string('day', 191);
             $table->time('hour');
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

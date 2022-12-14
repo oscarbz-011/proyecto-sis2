@@ -10,3 +10,12 @@ Repositorio de prueba del proyecto
 * `composer update`
 * Ejecutar las migraciones con los seeders necesarios
 * `php artisan migrate --seed`
+
+### Usuarios para acceder
+#### Admin
+* admin@gmail.com
+* 123456789
+#### Cliente
+* cliente@gmail.com
+* 123456789
+

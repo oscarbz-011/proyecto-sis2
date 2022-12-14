@@ -35,9 +35,7 @@
                     <td>
                     @foreach ($patient as $p)
                         @if($p->relatives_id == $r->id_relative)
-                        {
                             <label>{{$p->name}}</label>
-                        }
                         @endif
                     @endforeach
 

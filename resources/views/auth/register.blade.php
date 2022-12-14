@@ -1,4 +1,3 @@
-
 @include('components.nav')
 <section class="vh-100" style="background-color: #eee;">
   <br>
@@ -69,9 +68,7 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
-  </section>
+</section>
