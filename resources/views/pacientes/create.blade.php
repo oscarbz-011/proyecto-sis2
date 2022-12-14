@@ -42,16 +42,11 @@
             <div class="form-group col-md-6">
                 <label for="relatives">Dueño</label>
                 <select class="form-select" aria-label="Default select example" name="relatives_id">
-                    @role('admin')
+
                     @foreach($relatives as $item)
                          <option value="{{ $item->id_relative}}">{{$item->name}}</option>
                      @endforeach
-                    @endrole
-                    @role('cliente')
-                    @foreach($relatives as $item)
-                        <option value="{{ $item->id_relative}}">{{$item->name}}</option>
-                    @endforeach
-                    @endrole
+
                  </select>
              </div>
 
@@ -74,9 +69,16 @@
 
         <br>
         <input type="submit" class="btn btn-primary" value="Guardar">
+        @role('admin')
         <a class="pull-right" href="{{route('pacientes.index')}} ">
         <button type="button" class="btn btn-danger">Cancelar</button>
         </a>
+        @endrole
+        @role('cliente')
+        <a class="pull-right" href="{{route('perfil.index')}} ">
+        <button type="button" class="btn btn-danger">Cancelar</button>
+        </a>
+        @endrole
 
     </form>
 

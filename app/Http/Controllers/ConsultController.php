@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Consult;
 use App\Models\Date;
 use App\Models\Patient;
 use App\Models\Doctor;
+use App\Models\Relative;
 
 
 class ConsultController extends Controller
@@ -19,9 +20,19 @@ class ConsultController extends Controller
 
     public function create()
     {
-        $patients = Patient::all();
-        $doctors= Doctor::all();
-        return view('turnos.create', compact('patients','doctors'));
+        if( Auth::user()->hasRole('admin')){
+            $patients = Patient::all();
+            $doctors= Doctor::all();
+            return view('turnos.create', compact('patients','doctors'));
+        }
+        else{
+            $user = Auth::user()->id_user;
+            $id = Relative::where('users_id','=',$user)->pluck("id_relative");
+            $patients = Patient::where('relatives_id','=',$id)->get('name','id_patient');
+            $doctors= Doctor::all();
+            return view('turnos.create', compact('patients','doctors'));
+        }
+
 
     }
 

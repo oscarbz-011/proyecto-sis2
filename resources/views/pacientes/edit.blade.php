@@ -42,20 +42,27 @@
                         </div>
 
                     </div>
-                    {{--
+
                     <div class="form-group col-md-6">
-                        <label for="users_id">Username</label>
-		                <select class="form-select" aria-label="Default select example" name="curso_id">
-			                @foreach($lista_user as $item)
-			                <option value="{{ $item->id_user }}">{{ $item->username }}</option>
-                            @endforeach
+                        <label for="relatives_id">Dueño</label>
+		                <select class="form-select" aria-label="Default select example" name="relatives_id">
+			                 @foreach($relative as $item)
+                         <option value="{{ $item->id_relative}}">{{$item->name}}</option>
+                     @endforeach
                         </select>
-                    </div>--}}
+                    </div>
                     <br>
                     <input type="submit" class="btn btn-primary" value="Guardar">
+                    @role('admin')
                     <a class="pull-right" href="{{route('pacientes.index')}} ">
                         <button type="button" class="btn btn-danger">Cancelar</button>
                     </a>
+                    @endrole()
+                    @role('cliente')
+                    <a class="pull-right" href="{{route('perfil.index')}} ">
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                    </a>
+                    @endrole
                 </form>
             </div>
         </div>

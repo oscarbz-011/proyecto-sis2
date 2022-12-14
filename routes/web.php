@@ -13,6 +13,7 @@ use App\Http\Controllers\ConsultController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PerfilController;
 
 
 //Autenticacion
@@ -35,12 +36,12 @@ Route::resource('/turnos',ConsultController::class)->middleware('auth');
 Route::resource('medicamentos',MedicineController::class)->middleware('auth');
 //Familiar-paciente
 Route::resource('familiares',RelativeController::class)->middleware('auth');
-Route::resource('perfil',RelativeController::class)->middleware('auth');
+Route::resource('perfil',PerfilController::class)->middleware('auth');
 //Derivaciones
 Route::resource('derivaciones',TransferController::class)->middleware('auth');
 //Recetas
 Route::resource('recetas', PrescriptionController::class)->middleware('auth');
 //admin
-Route::resource('admin', UserController::class)->only(['index','edit','update'])->names('admin')->middleware('auth');
+Route::resource('admin', UserController::class)->middleware('auth');
 
 

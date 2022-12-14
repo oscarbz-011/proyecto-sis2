@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use \App\Models\Patient;
+use Illuminate\Support\Facades\Auth;
 use \App\Models\Relative;
 use Illuminate\Http\Request;
-
+use Flash;
 class PatientController extends Controller
 {
 
@@ -16,8 +17,17 @@ class PatientController extends Controller
 
     public function create()
     {
+        if( Auth::user()->hasRole('admin')){
         $relatives = Relative::all();
         return view('pacientes.create', compact('relatives'));
+        }
+        else{
+            $user = Auth::user()->id_user;
+            $relatives = Relative::join("users","relatives.users_id","=","users.id_user")
+            ->where('users.id_user','=',$user)
+            ->get();
+            return view('pacientes.create',compact('relatives'));
+        }
     }
 
     public function store(Request $request)
@@ -38,7 +48,7 @@ class PatientController extends Controller
 
         $patient = request()->except('_token');
         Patient::insert($patient);
-        //Flash::success('Creado correctamente');
+        Flash::success('Creado correctamente');
         return redirect (route('pacientes.index'));
     }
 
@@ -50,24 +60,25 @@ class PatientController extends Controller
 
     public function edit($id)
     {
-        $relative_list = Relative::all();
-        $lista = array("lista_relative" => $relative_list);
+        $relative = Relative::all();
+        //$lista = array("lista_relative" => $relative_list);
         $patient=Patient::findorFail($id);
-        return view('pacientes.edit',compact('patient','lista'));
+        return view('pacientes.edit',compact('patient','relative'));
     }
 
     public function update(Request $request, $id)
     {
+
         $patient=request()->except(['_token','_method']);
         patient::where('id_patient','=',$id)->update($patient);
-        //Flash::success('Actualizado correctamente');
+        Flash::success('Actualizado correctamente');
         return redirect ('pacientes');
     }
 
     public function destroy($id_relative)
     {
         Patient::destroy($id_relative);
-        //Flash::error('Eliminado correctamente');
+        Flash::error('Eliminado correctamente');
         return redirect('pacientes');
     }
 }

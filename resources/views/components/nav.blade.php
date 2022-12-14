@@ -16,17 +16,16 @@
                     </li>
                 @endcan
                 @can('pacientes.index')
+                    @role('admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/pacientes')}}">Pacientes</a>
                     </li>
+                    @endrole
                 @endcan
                 @can('familiares.index')
                     <li class="nav-item">
                         @role('admin')
                         <a class="nav-link" href="{{url('/familiares')}}">Familiares</a>
-                        @endrole
-                        @role('cliente')
-                        <a class="nav-link" href="{{url('/familiares')}}">Mis datos</a>
                         @endrole
                     </li>
                 @endcan

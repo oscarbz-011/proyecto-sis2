@@ -3,7 +3,7 @@
 
 <section class="vh-100" style="background-color: #eee;">
   <br>
-    <div class="container h-100">
+    <div class="container h-90">
 
         @if (count($errors)>0)
         <br>
@@ -18,7 +18,7 @@
         </div>
         @endif
 
-      <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row d-flex justify-content-center align-items-center h-90">
         <div class="col-lg-12 col-xl-11">
           <div class="card text-black" style="border-radius: 25px;">
             <div class="card-body p-md-5">
@@ -33,7 +33,7 @@
                       <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example3c">Email</label>
-                        <input autofocus="autofocus" type="email" id="form3Example3c" class="form-control" name="email" required/>
+                        <input autofocus="autofocus" type="email" id="form3Example3c" class="form-control" name="email" />
 
                       </div>
                     </div>
@@ -42,7 +42,7 @@
                       <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example4c">Contraseña</label>
-                        <input type="password" id="form3Example4c" class="form-control" name="password" required/>
+                        <input type="password" id="form3Example4c" class="form-control" name="password" />
                       </div>
                     </div>
 
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  <img src="{{asset('img/logo.png')}}"
                     class="img-fluid" alt="Sample image">
 
                 </div>

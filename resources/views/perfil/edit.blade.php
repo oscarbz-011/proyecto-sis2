@@ -3,7 +3,8 @@
     <div class="jumbotron">
         <div class="form-row align-items-center">
             <div class="form-group col-md-12">
-                <h1>Editar datos del familiar</h1>
+                <h1>Editar mis datos</h1>
+                
                 <form
                     action="{{url('familiares/'.$relative->id_relative)}}"
                     method="post"
@@ -70,7 +71,7 @@
                     </div>--}}
                     <br>
                     <input type="submit" class="btn btn-primary" value="Guardar">
-                    <a class="pull-right" href="{{route('familiares.index')}} ">
+                    <a class="pull-right" href="{{route('perfil.index')}} ">
                         <button type="button" class="btn btn-danger">Cancelar</button>
                     </a>
                 </form>

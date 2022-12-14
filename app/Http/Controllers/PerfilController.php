@@ -11,27 +11,25 @@ use Spatie\Permission\Traits\HasRoles;
 use Flash;
 use Psy\Command\WhereamiCommand;
 
-class RelativeController extends Controller
+class PerfilController extends Controller
 {
-
     public function index()
     {
-        //if( Auth::user()->hasRole('admin')){
+        if( Auth::user()->hasRole('admin')){
             $patient = Patient::all();
             $relatives = Relative::all();
-            return view('familiares.index', compact('relatives','patient'));
-        /*}
+            return view('perfil.index', compact('relatives','patient'));
+        }
         else{
 
             $user = Auth::user()->id_user;
-
+            $id = Relative::where('users_id','=',$user)->pluck("id_relative");
             $relative = Relative::join("users","relatives.users_id","=","users.id_user")
             ->where('users.id_user','=',$user)
             ->first();
-            $patient = Patient::all();
-
-            return view('perfil.index',compact('relative', 'patient'));
-        }*/
+            $patients = Patient::where('relatives_id','=',$id)->get();
+            return view('perfil.index',compact('relative', 'patients'));
+        }
 
     }
 
@@ -42,7 +40,8 @@ class RelativeController extends Controller
         $user_list = User::all();
         //$user_list = Auth::user();
         $lista = array("lista_user" => $user_list);
-        return response()->view('familiares.create', $lista);
+        $relatives = Relative::all();
+        return response()->view('perfil.create', compact('lista','relatives'));
 
 
     }
@@ -79,9 +78,18 @@ class RelativeController extends Controller
         $patient = Patient::join('relatives','relatives.id_relative','=','patients.relatives_id')
         ->select('patients.name')->where('relatives_id', 'LIKE', $id)->first();
         */
-        $patient = Patient::all();
-        $relative = Relative::findorFail($id);
-        return view('familiares.show',compact('relative', 'patient'));
+        if(Auth::user()->hasRole('admin')){
+            $patient = Patient::all();
+            $relative = Relative::findorFail($id);
+            return view('familiares.show',compact('relative', 'patient'));
+        }
+        else{
+            $user = Auth::user()->id_user;
+            $patients = Patient::all()->where('relatives_id','=',$user);
+            $relative = Relative::findorFail($id);
+            //return view('perfil.index',compact('relative', 'patient'));
+        }
+
 
 
 
@@ -90,13 +98,13 @@ class RelativeController extends Controller
 
     public function edit($id)
     {
-       // if( Auth::user()->hasRole('admin')){
+        if( Auth::user()->hasRole('admin')){
             $user_list = User::all();
             $lista = array("lista_user" => $user_list);
 
             $relative=Relative::findorFail($id);
             return view('familiares.edit',$lista,compact('relative'));
-       /* }
+        }
         else{
             $user = Auth::user()->id_user;
 
@@ -106,7 +114,7 @@ class RelativeController extends Controller
             $patient = Patient::all();
 
             return view('perfil.edit',compact('relative', 'patient'));
-        }*/
+        }
 
 
     }
@@ -125,4 +133,5 @@ class RelativeController extends Controller
         //Flash::error('Eliminado correctamente');
         return redirect('familiares');
     }
+
 }

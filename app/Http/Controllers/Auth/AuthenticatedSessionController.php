@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 
 
+
 class AuthenticatedSessionController extends Controller
 {
     public function store(Request $request){

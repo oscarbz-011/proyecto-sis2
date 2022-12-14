@@ -4,7 +4,7 @@
 
 <div class="container">
 	<br>
-	{{--@include('flash::message')--}}
+	@include('flash::message')
 	<br>
 	<h1>Lista de Pacientes</h1>
     @can('pacientes.create')
