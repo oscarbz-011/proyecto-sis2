@@ -32,7 +32,6 @@ class RegisteredUserController extends Controller
             Auth::login($user);
             return view ('welcome');
         }
-
         return view('admin.index');
     }
 }
